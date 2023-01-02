@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: #222;
+        }
+        .card{
+            width: 411px;
+            height: 220px;
+            margin: 28px auto;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg,rgba(128, 0, 128, 0.678),#fcd);
+            position: relative;
+            border-radius: 1.1rem;
+        }
+        strong{
+            position: absolute;
+            left: 20px;
+            top: 13px;
+            color: #fff;
+            font-family: cursive;
+            font-size: 20px;
+        }
+        figure{
+            width: 25px;
+            height: 25px;
+            position: absolute;
+            right: 18px;
+            top: 16px;
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        span{
+            width: 100%;
+            display: grid;
+            place-items: center;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            font-size: 25px;
+            color: #fff;
+        }
+        form{
+            background: rgb(185, 201, 169);
+            padding: 25px;
+            border-radius: 7px;
+        }
+        input{
+            margin: 0 auto;
+            text-align: center;
+            border-radius: 3px;
+            background: #fff;
+        }
+        p{
+            position: absolute;
+            bottom: 5px;
+            left: 20px;
+            font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+            color: #fff;
+            font-size: 20px;
+        }
+
+        button:focus{
+            animation: btn 2s linear infinite forwards;
+        }
+
+        @keyframes btn {
+            from{
+                box-shadow: 0;
+            }
+            to{
+                box-shadow: 0 0 35px 5px #0d6efd;
+            }
+        }
+        @media (min-width:992px){
+            .card{
+                margin-top: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <strong>Saman Bank</strong>
+        <figure>
+            <img src="logo.png" alt="">
+        </figure>
+        <span>0000-0000-0000-0000</span>
+        <p id="cvv2">000</p>
+    </div>
+
+    <form action="" class="row col-9 col-lg-4 mx-auto py-5 g-3">
+        <input type="text" class="col-5 col-lg-2" onkeyup="saman(this , 1)" placeholder="0000">
+        <input type="text" class="col-5 col-lg-2" onkeyup="saman(this , 2)" placeholder="0000">
+        <input type="text" class="col-5 col-lg-2" onkeyup="saman(this , 3)" placeholder="0000">
+        <input type="text" class="col-5 col-lg-2" onkeyup="saman(this , 4)" placeholder="0000">
+        <input type="text" class="col-9 col-lg-7 mx-auto mt-4" placeholder="000" onkeyup="saman1(this)">
+        <button class="btn btn-primary col-7 mx-auto mt-4">Create</button>
+    </form>
+</body>
+<script>
+    function saman(p , num){
+        let _value = p.value
+        if(_value.length == 0 && num != 1){
+            p.previousElementSibling.focus()
+        }
+        else{
+            if(_value.length == 4){
+            p.nextElementSibling.focus()
+        }
+        else if(_value.length > 4){
+            alert('Please write 4 numbers')
+        }
+        }
+        document.getElementsByClassName('btn')[0].addEventListener('click' , function(){
+            if(_value.length == 4 && num == 4){
+                alert('Your card is ready')
+            }
+        })
+
+        let _input = document.querySelectorAll('form>input')
+        document.getElementsByTagName('span')[0].innerHTML = _input[0].value + ' - ' + _input[1].value + ' - ' + _input[2].value + ' - ' + _input[3].value
+    }
+
+    function saman1(z){
+        let _cvv2 = z.value
+        if(_cvv2.length > 3){
+            alert('write 3 numbers for cvv2')
+        }
+        else if(_cvv2.length == 3){
+            document.getElementsByClassName('btn')[0].focus()
+        }
+        document.getElementById('cvv2').innerHTML = _cvv2
+    }
+</script>
+</html>
